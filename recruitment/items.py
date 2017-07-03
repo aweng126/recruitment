@@ -30,3 +30,5 @@ class ZhilianItem(scrapy.Item):
     #职位类别
     zwlb=scrapy.Field()
 
+class TongchengItem(scrapy.Item):
+    pass

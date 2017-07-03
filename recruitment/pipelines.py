@@ -58,4 +58,4 @@ class TuniuPipeline(object):  # 设置工序一
                 item['gsmc'],item['gwms']]  # 把数据中每一项整理出来
         self.ws.append(line)
         self.wb.save('hhh.xlsx')
-        print(line)
+        # print(line)
