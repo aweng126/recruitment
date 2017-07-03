@@ -12,7 +12,7 @@ class ZhilianItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     #公司名称
-    gsmz=scrapy.Field()
+    gsmc=scrapy.Field()
     #职位名称
     zwmc=scrapy.Field()
     #招聘人数
@@ -21,5 +21,12 @@ class ZhilianItem(scrapy.Item):
     zwyx= scrapy.Field()
     #公司地点
     gsdd = scrapy.Field()
-    #招聘要求
-    zpyq=scrapy.Field()
+    #学历要求
+    xlyq=scrapy.Field()
+    #经验要求
+    jyyq=scrapy.Field()
+    #职位描述
+    gwms=scrapy.Field()
+    #职位类别
+    zwlb=scrapy.Field()
+
