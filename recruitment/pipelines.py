@@ -7,7 +7,7 @@
 
 import pymongo
 from scrapy.exceptions import DropItem
-
+from openpyxl import Workbook
 
 class DuplicatesPipeline(object):
 
@@ -47,3 +47,15 @@ class MongoPipeline(object):
     def process_item(self, item, spider):
         self.db[self.collection_name].insert_one(dict(item))
         return item
+
+class TuniuPipeline(object):  # 设置工序一
+    wb = Workbook()
+    ws = wb.active
+    ws.append(['职位名称', '职位类别', '职位月薪', '学历要求', '经验要求', '招聘人数', '工作地点', '公司名称', '职位描述'])  # 设置表头、
+
+    def process_item(self,item,spider):
+        line = [item['zwmc'], item['zwlb'], item['zwyx'], item['xlyq'], item['jyyq'], item['zprs'], item['gsdd'],
+                item['gsmc'],item['gwms']]  # 把数据中每一项整理出来
+        self.ws.append(line)
+        self.wb.save('hhh.xlsx')
+        print(line)

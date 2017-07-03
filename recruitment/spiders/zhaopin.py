@@ -41,10 +41,10 @@ class ZhaopinSpider(scrapy.Spider):
         jyyq=yq_array[-3]
 
         #公司名称
-        gsmc = response.css('.top-fixed-box .fixed-inner-box  .fl h2 a::text').extract()
+        gsmc = response.css('.top-fixed-box .fixed-inner-box  .fl h2 a::text').extract_first()
 
         #职位名称
-        zwmc = response.css('.top-fixed-box .fixed-inner-box  .fl h1::text').extract()
+        zwmc = response.css('.top-fixed-box .fixed-inner-box  .fl h1::text').extract_first()
 
         #职位描述
         zwms_array = response.css('.terminalpage-main .tab-cont-box  .tab-inner-cont div p span::text ').extract()
@@ -74,6 +74,6 @@ class ZhaopinSpider(scrapy.Spider):
         item['zwlb']=zwlb
         yield item
 
-        print(self.num,item)
+        # print(self.num,item)
         self.num=self.num+1
 
