@@ -59,6 +59,9 @@ class ZhaopinSpider(scrapy.Spider):
         #公司地点
         gsdd = response.css('.terminalpage-main .tab-cont-box h2::text').extract_first().strip()[:3]
 
+        #职位类别
+        zwlb=response.css('.terminalpage  .terminalpage-left .terminal-ul li strong a::text').extract()[1]
+
         item =ZhilianItem()
         item['gsmc']=gsmc
         item['zwmc']=zwmc
@@ -68,6 +71,7 @@ class ZhaopinSpider(scrapy.Spider):
         item['xlyq']=xlyq
         item['jyyq']=jyyq
         item['gwms']=zwms
+        item['zwlb']=zwlb
         yield item
 
         print(self.num,item)
