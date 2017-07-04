@@ -31,4 +31,22 @@ class ZhilianItem(scrapy.Item):
     zwlb=scrapy.Field()
 
 class TongchengItem(scrapy.Item):
-    pass
+
+    #公司名称
+    gsmc=scrapy.Field()
+    #职位名称
+    zwmc=scrapy.Field()
+    #招聘人数
+    zprs=scrapy.Field()
+    #职位月薪
+    zwyx= scrapy.Field()
+    #公司地点
+    gsdd = scrapy.Field()
+    #学历要求
+    xlyq=scrapy.Field()
+    #经验要求
+    jyyq=scrapy.Field()
+    #职位描述
+    gwms=scrapy.Field()
+    #职位类别
+    zwlb=scrapy.Field()

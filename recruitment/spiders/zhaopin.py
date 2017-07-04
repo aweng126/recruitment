@@ -19,6 +19,8 @@ class ZhaopinSpider(scrapy.Spider):
         yield Request(self.zhilian_url, self.parse_page)
 
     def parse_page(self,response):
+
+
         per_page_url_lists=response.css('.newlist')[1:]
 
         for list in per_page_url_lists:
