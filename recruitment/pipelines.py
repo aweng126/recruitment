@@ -9,6 +9,25 @@ import pymongo
 from scrapy.exceptions import DropItem
 from openpyxl import Workbook
 
+class SalaryFormatPipline(object):
+    def hasNumbers(self,inputString):
+        return any(char.isdigit() for char in inputString)
+
+    def addYuan(self,inputstring):
+        lists = inputstring.split('-')
+        aa = ''
+        for list in lists:
+            list += '元-'
+            aa += list
+        return aa[:-1]
+
+    def process_item(self, item, spider):
+        print('111111111',item['zwyx'])
+        if self.hasNumbers(item['zwyx']):
+            item['zwyx']=self.addYuan(item['zwyx'])
+        print(item)
+        return item
+
 class DuplicatesPipeline(object):
 
     def __init__(self):
@@ -24,7 +43,7 @@ class DuplicatesPipeline(object):
 
 class MongoPipeline(object):
 
-    collection_name = 'zhilian'
+    collection_name = 'tongcheng'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
@@ -45,17 +64,18 @@ class MongoPipeline(object):
         self.client.close()
 
     def process_item(self, item, spider):
+        print('process_item',dict(item))
         self.db[self.collection_name].insert_one(dict(item))
         return item
 
 class TuniuPipeline(object):  # 设置工序一
     wb = Workbook()
     ws = wb.active
-    ws.append(['职位名称', '职位类别', '职位月薪', '学历要求', '经验要求', '招聘人数', '工作地点', '公司名称', '职位描述'])  # 设置表头、
+    ws.append(['职位名称', '职位类别', '职位月薪', '学历要求', '经验要求', '招聘人数', '工作地点', '公司名称', '职位描述','信息来源'])  # 设置表头、
 
     def process_item(self,item,spider):
         line = [item['zwmc'], item['zwlb'], item['zwyx'], item['xlyq'], item['jyyq'], item['zprs'], item['gsdd'],
-                item['gsmc'],item['gwms']]  # 把数据中每一项整理出来
+                item['gsmc'],item['gwms'],item['xxly']]  # 把数据中每一项整理出来
         self.ws.append(line)
-        self.wb.save('hhh.xlsx')
+        self.wb.save('tongcheng.xlsx')
         # print(line)

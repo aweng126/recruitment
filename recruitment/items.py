@@ -7,7 +7,6 @@
 
 import scrapy
 
-
 class ZhilianItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -50,3 +49,5 @@ class TongchengItem(scrapy.Item):
     gwms=scrapy.Field()
     #职位类别
     zwlb=scrapy.Field()
+    #信息来源
+    xxly=scrapy.Field()
