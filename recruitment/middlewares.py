@@ -4,7 +4,7 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+from scrapy import Request
 from scrapy import signals
 
 
@@ -54,3 +54,11 @@ class RecruitmentSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class MyReDirectMiddleware(object):
+    def process_response(self,request,response,spider):
+        if (response.status == 302):
+            redirct_url = response.headers['Location'].decode("utf-8")
+            # print('redirect_url',redirct_url)
+            return Request(redirct_url,spider.parse_per_page)
+        return response

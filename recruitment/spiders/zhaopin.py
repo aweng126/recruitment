@@ -13,8 +13,6 @@ class ZhaopinSpider(scrapy.Spider):
 
     zhilian_url='http://sou.zhaopin.com/jobs/searchresult.ashx?in=210500%3B160000%3B160200&jl=%E5%8C%97%E4%BA%AC&p=1&isadv=0'
 
-
-
     def start_requests(self):
         yield Request(self.zhilian_url, self.parse_page)
 

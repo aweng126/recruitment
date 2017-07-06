@@ -22,10 +22,9 @@ class SalaryFormatPipline(object):
         return aa[:-1]
 
     def process_item(self, item, spider):
-        print('111111111',item['zwyx'])
         if self.hasNumbers(item['zwyx']):
             item['zwyx']=self.addYuan(item['zwyx'])
-        print(item)
+        # print(item)
         return item
 
 class DuplicatesPipeline(object):
@@ -71,7 +70,7 @@ class MongoPipeline(object):
 class TuniuPipeline(object):  # 设置工序一
     wb = Workbook()
     ws = wb.active
-    ws.append(['职位名称', '职位类别', '职位月薪', '学历要求', '经验要求', '招聘人数', '工作地点', '公司名称', '职位描述','信息来源'])  # 设置表头、
+    ws.append(['job_name', 'job_class', 'job_wages', 'job_acquire', 'job_exper', 'job_num', 'com_place', 'com_name', 'com_intro','job_sourse'])  # 设置表头、
 
     def process_item(self,item,spider):
         line = [item['zwmc'], item['zwlb'], item['zwyx'], item['xlyq'], item['jyyq'], item['zprs'], item['gsdd'],
