@@ -7,7 +7,11 @@ class TongchengSpider(scrapy.Spider):
     handle_httpstatus_list = [301, 302]
     name = 'tongcheng'
     allowed_domains = ['58.com']
-    didian_list={'bj','cd','cq','cs','cc','dl','dg','fz','fs','gz',
+    #一期数据爬取
+    didian_list={'bj','cd','cq','cs','cc','dl','dg','fz'}
+
+    #二期数据爬取
+    didian_list2 = {'fs','gz',
           'gy','gl','hz','hz','heb','hf','hhht','hk','jn','km',
            'lz','ls','nj','nb','nn','nc','qd','sh','sz',
           'sy','sjz','sz','tj','ty','wh','wx','wlmq','wh',
@@ -41,7 +45,6 @@ class TongchengSpider(scrapy.Spider):
             yield Request(url=tongcheng_next_page, callback=self.parse_per_page)
 
     def parse_per_message(self, response):
-        # print('11111111111',response.status)
         if response.css('.con'):
             #公司地点
             gsdd = response.css('.con  .leftCon .pos_info .pos-area .pos_area_item::text ').extract_first().strip()
@@ -49,8 +52,8 @@ class TongchengSpider(scrapy.Spider):
             gsmc= response.css('.con .rightCon .item_con .company_baseInfo .comp_baseInfo_title .baseInfo_link a::text').extract_first().strip()
             #岗位描述
             gwms_arr=response.css('.con .leftCon .item_con .pos_description .posDes .des::text').extract()
+            gwms= ''.join(gwms_arr).strip().replace('/t', '')
 
-            gwms= ''.join(gwms_arr).strip()
             #职位类别
             zwlb = response.css('.con .leftCon .item_con  .pos_base_info .pos_title::text').extract_first().strip()
             #职位月薪
@@ -75,6 +78,4 @@ class TongchengSpider(scrapy.Spider):
             item['gwms'] = gwms
             item['zwlb'] = zwlb
             item['xxly'] = '58同城'
-            # print(self.num, item)
-            # self.num = self.num + 1
             yield item

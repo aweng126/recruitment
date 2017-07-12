@@ -66,9 +66,11 @@ DOWNLOADER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 #
 ITEM_PIPELINES = {
-    'recruitment.pipelines.MongoPipeline': 200,
+    # 'recruitment.pipelines.MongoPipeline': 200,
     'recruitment.pipelines.TuniuPipeline': 300,
     'recruitment.pipelines.SalaryFormatPipline': 100,
+    # usergent 代理
+    'recruitment.middlewares.RotateUserAgentMiddleware':200
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
